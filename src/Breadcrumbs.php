@@ -151,7 +151,13 @@ class Breadcrumbs extends NovaBreadcrumbs {
 
     protected function groupBreadcrumb(NovaRequest $request, $resource) {
 
-        $groupBreadcrumb = Breadcrumb::make(__($resource::group()));
+        $groupName = __($resource::group());
+
+        if (!is_string($groupName) && !$groupName instanceof \Stringable) {
+            $groupName = $resource::group();
+        }
+
+        $groupBreadcrumb = Breadcrumb::make($groupName);
 
         if (method_exists($resource, "groupBreadcrumb")) {
             return Arr::wrap($resource->groupBreadcrumb($request, $this, $groupBreadcrumb));
