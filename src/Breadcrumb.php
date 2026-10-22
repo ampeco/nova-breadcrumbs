@@ -24,7 +24,7 @@ class Breadcrumb extends NovaBreadcrumb {
     use InteractsWithRelationships;
 
     public function __construct($name, $path = null, $request = null) {
-        $this->name = $name;
+        $this->name = $name ?? '';
         $this->path = $path;
     }
 
