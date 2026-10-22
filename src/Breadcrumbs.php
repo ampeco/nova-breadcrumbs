@@ -206,6 +206,9 @@ class Breadcrumbs extends NovaBreadcrumbs {
 
         if ($type === "attach") {
             $relatedResourceClass = $request->relatedResource();
+            if (is_string($relatedResourceClass)) {
+                $relatedResourceClass = new $relatedResourceClass(new ($relatedResourceClass::$model));
+            }
             return [
                 Breadcrumb::indexResource($relatedResourceClass),
                 Breadcrumb::make(__("Attach")),
