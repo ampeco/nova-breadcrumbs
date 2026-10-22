@@ -109,7 +109,7 @@ class Breadcrumbs extends NovaBreadcrumbs {
 
         $novaClass = $resource::class;
 
-        if (!property_exists($novaClass, "resolveParentBreadcrumbs") || $novaClass::$resolveParentBreadcrumbs !== false) {
+        if (config('nova-breadcrumbs.includeParentBreadcrumbs',true) && (!property_exists($novaClass, "resolveParentBreadcrumbs") || $novaClass::$resolveParentBreadcrumbs !== false)) {
             $parent = $this->getParentResource($resource);
             $this->getRelationshipTree($parent);
         };
