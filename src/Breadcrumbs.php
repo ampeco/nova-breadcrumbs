@@ -118,7 +118,9 @@ class Breadcrumbs extends NovaBreadcrumbs {
             $breadcrumbsArray = array_merge($breadcrumbsArray, $this->groupBreadcrumb($this->request, $resource));
         }
 
+        if (config('nova-breadcrumbs.includeIndexBreadcrumbs',false)) {
         $breadcrumbsArray = array_merge($breadcrumbsArray, $this->indexBreadcrumb($this->request, $resource));
+        }
 
         if ($resource->model()->exists) {
             $breadcrumbsArray = array_merge($breadcrumbsArray, $this->detailBreadcrumb($this->request, $resource));
