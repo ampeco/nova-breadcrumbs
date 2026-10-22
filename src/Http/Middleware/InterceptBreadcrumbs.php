@@ -40,7 +40,7 @@ class InterceptBreadcrumbs {
                 $responsePage = $response->original;
             }
 
-            if (is_null($responsePage) || !is_array($responsePage)) {
+            if (is_null($responsePage) || !is_array($responsePage) || !isset($responsePage['component'])) {
                 return $response;
             }
 
