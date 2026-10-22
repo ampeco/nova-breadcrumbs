@@ -59,6 +59,10 @@ class InterceptBreadcrumbs {
     }
 
     protected function isPageController($controller) {
+        if ($controller === null) {
+            return false;
+        }
+
         return ((new \ReflectionClass($controller))?->getNamespaceName() ?? false) === "Laravel\Nova\Http\Controllers\Pages";
     }
 }
