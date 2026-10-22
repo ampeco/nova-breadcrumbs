@@ -117,7 +117,7 @@ class Breadcrumb extends NovaBreadcrumb {
             return null;
         }
 
-        $fields = $parentResource->fields(NovaRequest::createFromGlobals());
+        $fields = $parentResource->fields(NovaRequest::createFromBase(request()));
 
         foreach ($fields as $field) {
             if (!$field instanceof Tabs) {

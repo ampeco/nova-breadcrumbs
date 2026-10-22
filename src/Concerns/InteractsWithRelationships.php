@@ -17,7 +17,7 @@ trait InteractsWithRelationships {
 
     protected function relationships(Resource $resource, NovaRequest $request = null) {
         $model = $resource->model();
-        $request ??= NovaRequest::createFromGlobals();
+        $request ??= NovaRequest::createFromBase(request());
         return $this->relationshipsViaMethod($model) ?? $this->relationshipsViaFields($resource, $request) ?? $this->relationshipsViaType($model) ?? $this->relationshipsViaInvoke($model, $resource) ?? null;
     }
 
@@ -67,6 +67,11 @@ trait InteractsWithRelationships {
             }
 
             $returnType = $method->getReturnType();
+
+            if (!$returnType) {
+                return null;
+            }
+
             if (!is_null($returnType) && $returnType->getName() === BelongsTo::class) {
                 return $method->getShortName() ?? null;
             }
